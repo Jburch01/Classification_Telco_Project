@@ -27,7 +27,7 @@ df = prep_telco()
 
 train, validate, test =  train_validate_test(df, 'churn_Yes')
 
-x_cols = ['payment_type_Electronic check','internet_service_type_Fiber optic','senior_citizen','contract_type_Month-to-month','online_security_Yes', 'dependents_No', 'monthly_charges']
+x_cols = ['internet_service_type_Fiber optic','contract_type_Month-to-month', 'monthly_charges']
 
 y_cols = 'churn_Yes'
 
@@ -106,7 +106,7 @@ def get_random_forest():
     df.sort_values(by=['validate_accuracy'], ascending=False).head(1)
     
     #classification report:
-    print(classification_report(y_train, df['model_preds'][1]))
+    print(classification_report(y_train, df['model_preds'][0]))
     return df.sort_values(by=['validate_accuracy'], ascending=False).head(1)
 
 
@@ -115,8 +115,9 @@ def get_logReg_model(data):
     build a logistical regression model and prints out the accuracy on training and validation along with the classification report. 
     Must type in train_val as your data arrg to get the train val result.
     Type test if you want to test the model
+    if you want a csv of the model preds and preds proba then un comment all of the stuff at the bottom
     """
-    logit = LogisticRegression()
+    logit = LogisticRegression(random_state=706)
     logit.fit(x_train, y_train)
     y_pred = logit.predict(x_train)
     y_proba = logit.predict_proba(x_train)
@@ -131,7 +132,13 @@ def get_logReg_model(data):
                           y_pred))
     else: 
         print('Accuracy of logistic regression classifier on test set: {:.2f}'
-     .format(logit.score(x_test, y_test)))
+         .format(logit.score(x_test, y_test)))
+        # y_test_pred = logit.predict(x_test)
+        # y_test_proba = logit.predict_proba(x_test)
+        # df = pd.DataFrame(test.customer_id)
+        # df["y_pred"] = y_test_pred
+        # df['y_proba'] = y_test_proba[:,1]
+        # df.to_csv("predictions.csv", index=False)
     
     
 def get_churn_pie():
