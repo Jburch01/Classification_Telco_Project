@@ -39,6 +39,7 @@ def prep_telco():
         axis=1)
     return telco_db
 
+
 # Train Validate and Test split function
 
 
@@ -52,3 +53,5 @@ def train_validate_test(df, target):
                                        random_state=706,
                                        stratify=train_val[target])
     return train, validate, test
+
+
