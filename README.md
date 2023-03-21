@@ -37,8 +37,9 @@ My inital thoughts is that churn will be mainly decided by higher monthly paymen
     - Use models on train and validate data
     - Measure Models effectiveness on train and validate
     - Select best performing model for test
-- ### Conclusions   
-    
+- ### Draw Conclusions 
+   
+
 # Data Dictionary 
 
 | Feature | Values | Description                                  |
