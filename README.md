@@ -72,7 +72,7 @@ My inital thoughts is that churn will be mainly decided by higher monthly paymen
 - Run notebook
 
 # Takeaways and Conclusions
-- 27% of the data consist of churn
+- 26% of the data consist of churn
 - Some drivers include but not limited to are:
     - contract type
     - senior citizen status
