@@ -18,13 +18,12 @@ confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 
-# Visualize your success!
-import seaborn as sns
-import matplotlib.pyplot as plt
+
 
 
 
 df = prep_telco()
+
 
 train, validate, test =  train_validate_test(df, 'churn_Yes')
 
@@ -112,9 +111,15 @@ def get_random_forest():
 
 
 def get_logReg_model(data):
+    """
+    build a logistical regression model and prints out the accuracy on training and validation along with the classification report. 
+    Must type in train_val as your data arrg to get the train val result.
+    Type test if you want to test the model
+    """
     logit = LogisticRegression()
     logit.fit(x_train, y_train)
     y_pred = logit.predict(x_train)
+    y_proba = logit.predict_proba(x_train)
     logit_val = logit.predict(x_val)
     if data == 'train_val':
         print('Accuracy of Logistic Regression classifier on training set: {:.2f}'
@@ -130,6 +135,9 @@ def get_logReg_model(data):
     
     
 def get_churn_pie():
+    '''
+    prints a pie chart for telco churn
+    '''
     labels = ["Not churn", "Churn"]
   
     sns.set(style="whitegrid")
@@ -140,6 +148,10 @@ def get_churn_pie():
     
 
 def get_driver(driver):
+    """
+    builds a univariant visual based on the driver you put as the arrg
+    prints it out
+    """
     print(f'Univariate assessment of feature {driver}:')
     sns.countplot(data=train, x=driver)
     plt.show()
@@ -150,6 +162,10 @@ def get_driver(driver):
         
         
 def get_chisquared(driver):
+    """
+    Does the chisquaired testing and prints out a visual that goes along with it.
+    prints either reject null hypothesis or not
+    """
     a = 0.05
     sns.barplot(data=train,
                 x=driver,
@@ -167,7 +183,11 @@ def get_chisquared(driver):
         
         
         
-def get_monthly_charges():  
+def get_monthly_charges():
+    """
+    does the t test stats test for monthly charges and churn
+    also builds a boxplot visual to go with it
+    """
     a = 0.05
     sns.boxplot(x=train.monthly_charges, y=train.churn)
     plt.show()
@@ -184,3 +204,7 @@ def get_monthly_charges():
         print(f'We can reject our null hypothesis: and say that being a monthly charges can be a driver because the p value: {p} is less that alpha: {a}')
     else:
         print('We have failed to reject our null hypothesis')
+        
+        
+        
+        
